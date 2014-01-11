@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="gedouApp" ng-controller="gedouCtrl">
 <meta charset="utf-8">
 <link rel="stylesheet" href="default.css">
 <title>外道はるかぜちゃん</title>
@@ -16,10 +16,10 @@
 </div>
 <!-- Control Panel -->
 <form id="cpanel">
-  <button id="share_url">共有URL生成</button>
-  <textarea type="text" name="input1" ng-model="text1"
+  <button id="share_url" ng-click="generateUrl()">共有URL生成</button>
+  <textarea type="text" ng-model="text1"
     placeholder="お前が買ってきたアポロチョコ"></textarea>
-  <textarea type="text" name="input2" ng-model="text2"
+  <textarea type="text" ng-model="text2"
     placeholder="いちごの部分だけ全部食った！"></textarea>
 </form>
 
@@ -70,5 +70,6 @@
 </script>
 
 <script src="angular.min.js"></script>
+<script src="main.js"></script>
 
 </html>
