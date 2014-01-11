@@ -7,8 +7,19 @@
   border: 1px solid #ccc;
 }
 
+body {
+  font-size: 16px;
+  background-color: #fff;
+  color: #000;
+}
+
 body > h1:first-child {
   text-align: center;
+}
+
+body > div {
+  width: 640px;
+  margin: 16px auto;
 }
 
 #screen > img {
