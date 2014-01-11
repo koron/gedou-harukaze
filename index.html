@@ -16,14 +16,19 @@
 </div>
 <!-- Control Panel -->
 <form id="cpanel">
-  <button id="share_url" ng-click="generateUrl()">共有URL生成</button>
+  <button id="share_url" ng-click="generateUrl()" disabled>共有URL生成</button>
   <textarea type="text" ng-model="text1"
     placeholder="お前が買ってきたアポロチョコ"></textarea>
   <textarea type="text" ng-model="text2"
     placeholder="いちごの部分だけ全部食った！"></textarea>
 </form>
 
-<div>Chrome か Safari だと綺麗に見えるかも</div>
+<div>
+<ul>
+  <li>Chrome か Safari だと綺麗に見えるかも
+  <li>「共有URL作成」ボタンはいま準備中
+</ul>
+</div>
 
 <div>
   <a href="http://yaplog.jp/harukazechan/archive/487">元ネタ</a>
