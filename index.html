@@ -1,13 +1,23 @@
 <!DOCTYPE html>
+<html ng-app>
 <meta charset="utf-8">
 <link rel="stylesheet" href="default.css">
 <title>外道はるかぜちゃん</title>
+<h1>外道はるかぜちゃんジェネレータ</h1>
 <div id="screen">
   <img src="baby.jpg" alt="はるかぜちゃん/赤ん坊">
   <div id="script_first" class="script">
-    <p>お前が買ってきたアポロチョコ</p>
+    <p>{{text1 || 'お前が買ってきたアポロチョコ'}}</p>
   </div>
   <div id="script_second" class="script">
-    <p>いちごの部分だけ全部食った！</p>
+    <p>{{text2 || 'いちごの部分だけ全部食った！'}}</p>
   </div>
 </div>
+<form id="cpanel">
+  <input type="text" name="input1" ng-model="text1"
+    placeholder="お前が買ってきたアポロチョコ">
+  <input type="text" name="input2" ng-model="text2"
+    placeholder="いちごの部分だけ全部食った！">
+</form>
+<script src="angular.min.js"></script>
+</html>

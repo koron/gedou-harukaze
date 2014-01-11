@@ -4,6 +4,11 @@
   padding: 0;
   width: 640px;
   height: 480px;
+  border: 1px solid #ccc;
+}
+
+body > h1:first-child {
+  text-align: center;
 }
 
 #screen > img {
@@ -28,6 +33,7 @@
   font-size: 24px;
   line-height: 36px;
   overflow: hidden;
+  word-break: break-all;
 }
 
 #script_first {
@@ -42,4 +48,24 @@
   top: 50px;
   width: 100px;
   height: 200px;
+}
+
+#cpanel {
+  display: block;
+  margin: 16px auto;
+  padding: 0;
+  width: 640px;
+}
+
+#cpanel > input {
+  display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin: 8px 0;
+  padding: 4px 8px;
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
 }
