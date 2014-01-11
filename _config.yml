@@ -2,3 +2,5 @@ encoding: utf-8
 
 exclude:
   - 'README.mkd'
+
+rev: 2

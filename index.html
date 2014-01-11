@@ -1,17 +1,19 @@
+---
+---
 <!DOCTYPE html>
 <html ng-app="gedouApp" ng-controller="gedouCtrl">
 <meta charset="utf-8">
-<link rel="stylesheet" href="default.css">
+<link rel="stylesheet" href="default.css?r={{site.rev}}">
 <title>外道はるかぜちゃん</title>
 <h1>外道はるかぜちゃんジェネレータ</h1>
 <!-- Main Image -->
 <div id="screen">
   <img src="baby.jpg" alt="はるかぜちゃん/赤ん坊">
   <div id="script_first" class="script">
-    <p>{{text1 || 'お前が買ってきたアポロチョコ'}}</p>
+    <p>{{ "{{text1 || 'お前が買ってきたアポロチョコ'" }}}}</p>
   </div>
   <div id="script_second" class="script">
-    <p>{{text2 || 'いちごの部分だけ全部食った！'}}</p>
+    <p>{{ "{{text2 || 'いちごの部分だけ全部食った！'" }}}}</p>
   </div>
 </div>
 <!-- Control Panel -->
@@ -74,10 +76,10 @@
   ga('send', 'pageview');
 </script>
 
-<script src="js/angular.min.js"></script>
-<script src="js/rawdeflate.js"></script>
-<script src="js/rawinflate.js"></script>
-<script src="js/base64.js"></script>
-<script src="js/main.js"></script>
+<script src="js/angular.min.js?r={{site.rev}}"></script>
+<script src="js/rawdeflate.js?r={{site.rev}}"></script>
+<script src="js/rawinflate.js?r={{site.rev}}"></script>
+<script src="js/base64.js?r={{site.rev}}"></script>
+<script src="js/main.js?r={{site.rev}}"></script>
 
 </html>
