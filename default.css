@@ -1,0 +1,45 @@
+#screen {
+  position: relative;
+  margin: 0 auto;
+  padding: 0;
+  width: 640px;
+  height: 480px;
+}
+
+#screen > img {
+  position: absolute;
+}
+
+#screen > .script {
+  position: absolute;
+  display: inline-block;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+#screen > .script > p {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+  padding: 0;
+  -webkit-writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+  font-size: 24px;
+  line-height: 36px;
+  overflow: hidden;
+}
+
+#script_first {
+  right: 15px;
+  top: 15px;
+  width: 200px;
+  height: 320px;
+}
+
+#script_second {
+  left: 45px;
+  top: 50px;
+  width: 100px;
+  height: 200px;
+}
