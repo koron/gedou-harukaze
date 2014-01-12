@@ -87,7 +87,6 @@
         var obj = KiiObject.objectWithURI(uri);
         obj.set('text1', $scope.text1);
         obj.set('text2', $scope.text2);
-        obj._setUUID(key);
         obj.saveAllFields({
           success: function (obj) {
             callbacks.success(key, obj);
