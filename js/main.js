@@ -84,6 +84,31 @@
         }
         var uri = 'kiicloud://buckets/data1/objects/' + key;
         var obj = KiiObject.objectWithURI(uri);
+        obj.refresh({
+          success: function (obj) {
+            if ($scope.text1 === obj.get('text1') &&
+                $scope.text2 === obj.get('text2')) {
+              callbacks.success(key, obj);
+            } else {
+              console.log('ERROR: key conflict:', key,
+                'expected:', {
+                  text1: $scope.text1,
+                  text2: $scope.text2
+                },
+                'actually:', {
+                  text1: obj.get('text1'),
+                  text2: obj.get('text2')
+                });
+              callbacks.failure(key, obj, 'ERROR: key conflict');
+            }
+          },
+          failure: function (obj, errstr) {
+            save2(key, obj, callbacks);
+          }
+        });
+      }
+
+      function save2(key, obj, callbacks) {
         obj.set('text1', $scope.text1);
         obj.set('text2', $scope.text2);
         obj.saveAllFields({
@@ -91,7 +116,7 @@
             callbacks.success(key, obj);
           },
           failure: function (obj, errstr) {
-            console.log('ERROR: save failed: ' + errstr);
+            console.log('ERROR: save2 failed: ' + errstr);
             callbacks.failure(key, obj, errstr);
           }
         });
