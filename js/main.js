@@ -44,36 +44,35 @@
 
   app.controller('gedouCtrl', ['$scope', '$location',
     function ($scope, $location) {
-      $scope.text1 = '';
-      $scope.text2 = '';
+      setText('', '');
       Kii.initializeWithSite('79fff252', '2f3af52fa90205787fb4d41bf48a175d',
         KiiSite.JP);
 
       function setText(t1, t2) {
         $scope.text1 = t1;
         $scope.text2 = t2;
-        $scope.$apply();
       }
 
       function setEmptyText() {
         setText('', '');
       }
 
-      function load(key) {
+      function load(key, callbacks) {
         var uri = 'kiicloud://buckets/data1/objects/' + key;
         KiiObject.objectWithURI(uri).refresh({
           success: function (kiiobj) {
             var t1 = kiiobj.get('text1');
             var t2 = kiiobj.get('text2');
             if (t1 && t2) {
-              setText(t1, t2);
+              callbacks.success(key, t1, t2);
             } else {
-              setEmptyText();
+              console.log('ERROR: received incomplete data', t1, t2);
+              callbacks.failure(key, 'received incomplete data');
             }
           },
           failure: function (kiiobj, errstr) {
             console.log('ERROR: load failed: ' + errstr);
-            setEmptyText();
+            callbacks.failure(key, errstr);
           }
         });
       }
@@ -102,8 +101,10 @@
         var key = save({
           success: function (key, obj) {
             $location.search({k: key});
+            $scope.$apply();
           },
           failure: function (key, obj, errstr) {
+            $scope.$apply();
             alert('共有に失敗しました\n\n詳細: ' + errstr);
           }
         });
@@ -112,7 +113,16 @@
       var search = $location.search();
       if (search['k']) {
         try {
-          load(search.k);
+          load(search.k, {
+            success: function(key, t1, t2) {
+              setText(t1, t2);
+              $scope.$apply();
+            },
+            failure: function(key, errstr) {
+              setEmptyText();
+              $scope.$apply();
+            }
+          });
         } catch (e) {
           // ignore.
           console.log(e);
