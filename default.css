@@ -45,6 +45,7 @@ body > div {
   line-height: 36px;
   overflow: hidden;
   word-break: break-all;
+  white-space: pre-wrap;
 }
 
 #script_first {
