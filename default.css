@@ -16,6 +16,7 @@ body {
 
 body > h1:first-child {
   text-align: center;
+  line-height: normal;
 }
 
 body > div {
