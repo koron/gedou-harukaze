@@ -44,6 +44,8 @@
 
   app.controller('gedouCtrl', ['$scope', '$location',
     function ($scope, $location) {
+      $scope.text1 = '';
+      $scope.text2 = '';
       Kii.initializeWithSite('79fff252', '2f3af52fa90205787fb4d41bf48a175d',
         KiiSite.JP);
 
