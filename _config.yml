@@ -4,4 +4,4 @@ exclude:
   - 'README.mkd'
   - 'tmp'
 
-rev: 3
+rev: 4

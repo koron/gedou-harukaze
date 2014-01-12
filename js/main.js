@@ -103,8 +103,6 @@
         var key = save({
           success: function (key, obj) {
             $location.search({k: key});
-            // ツイートや+1のURLを更新するため
-            window.location.href = $location.url();
           },
           failure: function (key, obj, errstr) {
             alert('共有に失敗しました\n\n詳細: ' + errstr);
