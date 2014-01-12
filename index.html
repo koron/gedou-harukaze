@@ -18,7 +18,7 @@
 </div>
 <!-- Control Panel -->
 <form id="cpanel">
-  <button id="share_url" ng-click="generateUrl()" disabled>共有URL生成</button>
+  <button id="share_url" ng-click="generateUrl()">共有URL生成</button>
   <textarea type="text" ng-model="text1"
     placeholder="お前が買ってきたアポロチョコ"></textarea>
   <textarea type="text" ng-model="text2"
@@ -83,6 +83,7 @@
 <script src="js/jquery-1.10.2.min.js?r={{site.rev}}"></script>
 <script src="js/angular.min.js?r={{site.rev}}"></script>
 <script src="js/KiiSDK.js?r={{site.rev}}"></script>
+<script src="js/hashids.min.js?r={{site.rev}}"></script>
 <script src="js/main.js?r={{site.rev}}"></script>
 
 </html>

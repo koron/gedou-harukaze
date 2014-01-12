@@ -11,11 +11,27 @@
     }
   }
 
+  function hashCode(s) {
+    var hash = 0;
+    for (var i = 0; i < s.length; ++i) {
+      var ch = s.charCodeAt(i);
+      hash = ((hash << 5) - hash) + ch;
+    }
+    return hash;
+  }
+
+  function plusCode(n) {
+    return n + 0x7fffffff + 1;
+  }
+  global.plusCode = plusCode;
+
   function calcKey(a, b) {
     if (isEmpty(a) || isEmpty(b)) {
       return '';
     }
-    // TODO:
+    var ha = plusCode(hashCode(a));
+    var hb = plusCode(hashCode(b));
+    return (new Hashids()).encrypt(ha, hb);
   }
 
   app.config(function($locationProvider) {
@@ -65,7 +81,8 @@
         var obj = KiiObject.objectWithURI(uri);
         obj.set('text1', $scope.text1);
         obj.set('text2', $scope.text2);
-        obj.save({
+        obj._setUUID(key);
+        obj.saveAllFields({
           success: function (obj) {
             callbacks.success(key, obj);
           },
