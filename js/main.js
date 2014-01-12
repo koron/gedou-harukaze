@@ -25,13 +25,17 @@
   }
   global.plusCode = plusCode;
 
-  function calcKey(a, b) {
+  function calcKey(a, b, c) {
     if (isEmpty(a) || isEmpty(b)) {
       return '';
     }
+    if (!c) {
+      c = '';
+    }
     var ha = plusCode(hashCode(a));
     var hb = plusCode(hashCode(b));
-    return (new Hashids()).encrypt(ha, hb);
+    var hc = plusCode(hashCode(c));
+    return (new Hashids()).encrypt(ha, hb, hc);
   }
 
   app.config(function($locationProvider) {
@@ -73,7 +77,7 @@
       }
 
       function save(callbacks) {
-        var key = calcKey($scope.text1, $scope.text2);
+        var key = calcKey($scope.text1, $scope.text2, '');
         if (isEmpty(key)) {
           return null;
         }
