@@ -16,6 +16,7 @@
     for (var i = 0; i < s.length; ++i) {
       var ch = s.charCodeAt(i);
       hash = ((hash << 5) - hash) + ch;
+      hash = hash & hash;
     }
     return hash;
   }
