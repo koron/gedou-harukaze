@@ -3,46 +3,99 @@
 
   var app = angular.module('gedouApp', []);
 
+  function isEmpty(s) {
+    if (!s || s === '') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function calcKey(a, b) {
+    if (isEmpty(a) || isEmpty(b)) {
+      return '';
+    }
+    // TODO:
+  }
+
   app.config(function($locationProvider) {
     $locationProvider.html5Mode(true);
   });
+
   app.controller('gedouCtrl', ['$scope', '$location',
     function ($scope, $location) {
-      function decode(data) {
-        var json = Base64.btou(RawDeflate.inflate(Base64.fromBase64(data)));
-        var raw = JSON.parse(json);
-        // XXX: read data from storage.
-        if (raw[0] && raw[1]) {
-          $scope.text1 = raw[0];
-          $scope.text2 = raw[1];
-        }
+      Kii.initializeWithSite('79fff252', '2f3af52fa90205787fb4d41bf48a175d',
+        KiiSite.JP);
+
+      function setText(t1, t2) {
+        $scope.text1 = t1;
+        $scope.text2 = t2;
+        $scope.$apply();
       }
 
-      function encode() {
-        var raw = [$scope.text1, $scope.text2];
-        if (raw[0] == null || raw[1] == null) {
+      function setEmptyText() {
+        setText('', '');
+      }
+
+      function load(key) {
+        var uri = 'kiicloud://buckets/data1/objects/' + key;
+        KiiObject.objectWithURI(uri).refresh({
+          success: function (kiiobj) {
+            var t1 = kiiobj.get('text1');
+            var t2 = kiiobj.get('text2');
+            if (t1 && t2) {
+              setText(t1, t2);
+            } else {
+              setEmptyText();
+            }
+          },
+          failure: function (kiiobj, errstr) {
+            console.log('ERROR: load failed: ' + errstr);
+            setEmptyText();
+          }
+        });
+      }
+
+      function save(callbacks) {
+        var key = calcKey($scope.text1, $scope.text2);
+        if (isEmpty(key)) {
           return null;
         }
-        // XXX: persist raw to storage with key.
-        var json = JSON.stringify(raw);
-        var b64 = Base64.toBase64(RawDeflate.deflate(Base64.utob(json)));
-        return b64;
+        var uri = 'kiicloud://buckets/data1/objects/' + key;
+        var obj = KiiObject.objectWithURI(uri);
+        obj.set('text1', $scope.text1);
+        obj.set('text2', $scope.text2);
+        obj.save({
+          success: function (obj) {
+            callbacks.success(key, obj);
+          },
+          failure: function (obj, errstr) {
+            console.log('ERROR: save failed: ' + errstr);
+            callbacks.failure(key, obj, errstr);
+          }
+        });
       }
 
       $scope.generateUrl = function () {
-        var data = encode();
-        if (data) {
-          $location.search({d: encode()});
-          window.location.href = $location.url();
-        }
+        var key = save({
+          success: function (key, obj) {
+            $location.search({k: key});
+            // ツイートや+1のURLを更新するため
+            window.location.href = $location.url();
+          },
+          failure: function (key, obj, errstr) {
+            alert('共有に失敗しました\n\n詳細: ' + errstr);
+          }
+        });
       }
 
       var search = $location.search();
-      if (search['d']) {
+      if (search['k']) {
         try {
-          decode(search.d);
+          load(search.k);
         } catch (e) {
           // ignore.
+          console.log(e);
         }
       }
     }
