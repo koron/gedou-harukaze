@@ -138,6 +138,81 @@
         });
       }
 
+      function safeString(value1, value2) {
+        return isEmpty(value1) ? value2 : value1;
+      }
+
+      function drawTextVertical(ctx, text, x, y, width, height) {
+
+        // Measure each characters and layout it.
+        var data = []; // [{ch, x, y, w, h}]
+        var lines = text.split('\n');
+        var curr = { x: 0, y: 0, maxWidth: 0, totalWidth: 0, maxWidth2: 0 };
+        var totalWidth = 0;
+
+        function lineFeed(curr) {
+          if (curr.maxWidth > curr.maxWidth2) {
+            curr.maxWidth2 = curr.maxWidth;
+          }
+          curr.x += curr.maxWidth + 12;
+          curr.y = 0;
+          curr.totalWidth += curr.maxWidth + 12;
+          curr.maxWidth = 0;
+        }
+
+        for (var i = 0, M = lines.length; i < M; ++i) {
+          curr.y = 0;
+          var line = lines[i];
+          for (var j = 0, N = line.length; j < N; ++j) {
+            var ch = line.charAt(j);
+            var m = ctx.measureText(ch);
+            var w = m.width;
+            var h = m.width;
+            if ((curr.y + h) > height) {
+              lineFeed(curr);
+            }
+            data.push({ ch: ch, x: curr.x, y: curr.y, w: w, h: h });
+            if (curr.maxWidth < w) {
+              curr.maxWidth = w;
+            }
+            curr.y += h;
+          }
+          lineFeed(curr);
+        }
+
+        // Draw characters.
+        var right = x + width - (width - curr.totalWidth) / 2;
+        var top = y;
+        var maxWidth = curr.maxWidth2;
+        for (var i = 0, M = data.length; i < M; ++i) {
+          var item = data[i];
+          ctx.fillText(item.ch,
+              right - item.x - maxWidth + (maxWidth - item.w) /2,
+              top + item.y + item.h);
+        }
+      }
+
+      function drawHarukazeChan(ctx) {
+        ctx.drawImage($('#bg_img')[0], 0, 0);
+        ctx.font = 'bold 24px sans-serif';
+        var t1 = safeString($scope.text1, 'お前が買ってきたアポロチョコ');
+        var t2 = safeString($scope.text2, 'いちごの部分だけ全部食った！');
+        drawTextVertical(ctx, t1, 425, 15, 200, 320);
+        drawTextVertical(ctx, t2, 45, 50, 100, 200);
+        return ctx;
+      }
+
+      $scope.onclick_saveAsImage = function () {
+        // Create a canvas and draw on it.
+        var canvas = document.createElement('canvas');
+        canvas.width = 640;
+        canvas.height = 480;
+        drawHarukazeChan(canvas.getContext('2d'));
+        // Save canvas as a PNG image.
+        var url = canvas.toDataURL();
+        window.open(url, '外道はるかぜちゃん');
+      }
+
       var search = $location.search();
       if (search['k']) {
         try {
