@@ -8,7 +8,7 @@
 <h1>外道はるかぜちゃんジェネレータ</h1>
 <!-- Main Image -->
 <div id="screen">
-  <img src="baby.jpg" alt="はるかぜちゃん/赤ん坊">
+  <img id="bg_img" src="baby.jpg" alt="はるかぜちゃん/赤ん坊">
   <div id="script_first" class="script">
     <p>{{ "{{text1 || 'お前が買ってきたアポロチョコ'" }}}}</p>
   </div>
@@ -35,9 +35,13 @@
 <ul>
   <li>現在のリビジョン: {{site.rev}}
   <li>Chrome か Safari だと綺麗に見えます
+  <li>画像保存はまだ実験中です
+  <ul>
+    <li>ボタン押すと別ウィンドウでPNG画像が開きますので、ブラウザの保存機能(CTRL+S)を使ってファイルに保存してください
+    <li>小さい文字「っ」「ゃ」などのレイアウトがちょっとおかしくなります
+  </ul>
   <li>「共有URL作成」には <a href="http://jp-cloud.kii.com/">Kii Cloud</a> を使ってます
   <li>要望や不具合報告は <a href="https://github.com/koron/gedou-harukaze/issues">こちら</a> まで！
-  <li>画像保存は実験中です
 </ul>
 </div>
 
