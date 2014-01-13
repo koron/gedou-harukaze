@@ -128,9 +128,11 @@
           success: function (key, obj) {
             $location.search({k: key});
             $scope.$apply();
+            _gaq.push(['_trackEvent', 'Save', 'Success', key]);
           },
           failure: function (key, obj, errstr) {
             $scope.$apply();
+            _gaq.push(['_trackEvent', 'Save', 'Failure', key]);
             alert('共有に失敗しました\n\n詳細: ' + errstr);
           }
         });
@@ -143,10 +145,12 @@
             success: function(key, t1, t2) {
               setText(t1, t2);
               $scope.$apply();
+              _gaq.push(['_trackEvent', 'Load', 'Success', key]);
             },
             failure: function(key, errstr) {
               setEmptyText();
               $scope.$apply();
+              _gaq.push(['_trackEvent', 'Load', 'Failure', key]);
             }
           });
         } catch (e) {
