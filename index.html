@@ -18,9 +18,13 @@
 </div>
 <!-- Control Panel -->
 <form id="cpanel">
-  <button id="share_url" ng-click="generateUrl()"
-    ng-disabled="text1.length == 0 || text2.length == 0"
-    >共有URL生成</button>
+  <nav>
+    <button id="share_url" ng-click="generateUrl()"
+      ng-disabled="text1.length == 0 || text2.length == 0"
+      >共有URL生成</button>
+    <button ng-click="onclick_saveAsImage()"
+      >画像保存</button>
+  </nav>
   <textarea type="text" ng-model="text1"
     placeholder="お前が買ってきたアポロチョコ"></textarea>
   <textarea type="text" ng-model="text2"
@@ -30,9 +34,10 @@
 <div>
 <ul>
   <li>現在のリビジョン: {{site.rev}}
-  <li>Chrome か Safari だと綺麗に見えるかも
-  <li>「共有URL作成」には <a href="http://jp-cloud.kii.com/">Kii Cloud</a> を使った
+  <li>Chrome か Safari だと綺麗に見えます
+  <li>「共有URL作成」には <a href="http://jp-cloud.kii.com/">Kii Cloud</a> を使ってます
   <li>要望や不具合報告は <a href="https://github.com/koron/gedou-harukaze/issues">こちら</a> まで！
+  <li>画像保存は実験中です
 </ul>
 </div>
 

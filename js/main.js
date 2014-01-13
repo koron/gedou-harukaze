@@ -138,6 +138,10 @@
         });
       }
 
+      $scope.onclick_saveAsImage = function () {
+        console.log(new Date(), 'saveAsImage');
+      }
+
       var search = $location.search();
       if (search['k']) {
         try {

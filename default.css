@@ -71,14 +71,24 @@ body > div {
   width: 640px;
 }
 
-#cpanel > button {
+#cpanel > nav {
   display: inline-block;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   float: right;
+  margin: 0;
+  padding: 0;
+  max-width: 132px;
+}
+
+#cpanel > nav > button {
+  display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   width: 132px;
   height: 36px;
   font-size: 16px;
+  margin-bottom: 4px;
 }
 
 #cpanel > textarea {
