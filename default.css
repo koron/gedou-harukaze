@@ -8,6 +8,7 @@
 }
 
 body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', 'ＭＳ Ｐゴシック', sans-serif;
   font-size: 16px;
   line-height: 20px;
   background-color: #fff;
@@ -113,4 +114,8 @@ body > div {
 
 .social-button {
   margin-top: 6px;
+}
+
+[ng-cloak] {
+  display: none;
 }
