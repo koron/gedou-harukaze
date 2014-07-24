@@ -1,7 +1,7 @@
 ---
 ---
 <!DOCTYPE html>
-<html ng-app="gedouApp" ng-controller="gedouCtrl">
+<html ng-app="gedouApp" ng-controller="gedouCtrl" ng-show="ready" class="ng-hide">
 <meta charset="utf-8">
 <link rel="stylesheet" href="default.css?r={{site.rev}}">
 <title>外道はるかぜちゃん</title>
@@ -10,10 +10,10 @@
 <div id="screen">
   <img id="bg_img" src="baby.jpg" alt="はるかぜちゃん/赤ん坊">
   <div id="script_first" class="script">
-    <p ng-cloak>{{ "{{text1 || 'お前が買ってきたアポロチョコ'" }}}}</p>
+    <p>{{ "{{text1 || 'お前が買ってきたアポロチョコ'" }}}}</p>
   </div>
   <div id="script_second" class="script">
-    <p ng-cloak>{{ "{{text2 || 'いちごの部分だけ全部食った！'" }}}}</p>
+    <p>{{ "{{text2 || 'いちごの部分だけ全部食った！'" }}}}</p>
   </div>
 </div>
 <!-- Control Panel -->

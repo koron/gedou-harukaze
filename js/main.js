@@ -45,6 +45,8 @@
 
   app.controller('gedouCtrl', ['$scope', '$location',
     function ($scope, $location) {
+      $scope.ready = false;
+
       setText('', '');
       Kii.initializeWithSite('79fff252', '2f3af52fa90205787fb4d41bf48a175d',
         KiiSite.JP);
@@ -219,11 +221,13 @@
           load(search.k, {
             success: function(key, t1, t2) {
               setText(t1, t2);
+              $scope.ready = true;
               $scope.$apply();
               _gaq.push(['_trackEvent', 'Load', 'Success', key]);
             },
             failure: function(key, errstr) {
               setEmptyText();
+              $scope.ready = true;
               $scope.$apply();
               _gaq.push(['_trackEvent', 'Load', 'Failure', key]);
             }
@@ -232,6 +236,8 @@
           // ignore.
           console.log(e);
         }
+      } else {
+        $scope.ready = true;
       }
     }
   ]);
