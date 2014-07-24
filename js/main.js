@@ -215,6 +215,9 @@
 
       var search = $location.search();
       if (search['k']) {
+        // Show empty text durling data load, to hide default text2.
+        $scope.text1 = ' ';
+        $scope.text2 = ' ';
         try {
           load(search.k, {
             success: function(key, t1, t2) {
