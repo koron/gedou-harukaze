@@ -215,7 +215,7 @@
 
       var search = $location.search();
       if (search['k']) {
-        // Show empty text durling data load, to hide default text2.
+        // Show empty text durling data load, to hide default texts.
         $scope.text1 = ' ';
         $scope.text2 = ' ';
         try {
