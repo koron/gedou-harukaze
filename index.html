@@ -10,10 +10,10 @@
 <div id="screen">
   <img id="bg_img" src="baby.jpg" alt="はるかぜちゃん/赤ん坊">
   <div id="script_first" class="script">
-    <p ng-cloak>{{ "{{text1 || 'お前が買ってきたアポロチョコ'" }}}}</p>
+    <p ng-cloak>{{ "{{text1 || defaultText1" }}}}</p>
   </div>
   <div id="script_second" class="script">
-    <p ng-cloak>{{ "{{text2 || 'いちごの部分だけ全部食った！'" }}}}</p>
+    <p ng-cloak>{{ "{{text2 || defaultText2" }}}}</p>
   </div>
 </div>
 <!-- Control Panel -->
@@ -26,9 +26,9 @@
       >画像保存</button>
   </nav>
   <textarea type="text" ng-model="text1"
-    placeholder="お前が買ってきたアポロチョコ"></textarea>
+    placeholder="{{ "{{defaultText1"}}}}"></textarea>
   <textarea type="text" ng-model="text2"
-    placeholder="いちごの部分だけ全部食った！"></textarea>
+    placeholder="{{ "{{defaultText2"}}}}"></textarea>
 </form>
 
 <div>

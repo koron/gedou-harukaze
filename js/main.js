@@ -49,6 +49,11 @@
       Kii.initializeWithSite('79fff252', '2f3af52fa90205787fb4d41bf48a175d',
         KiiSite.JP);
 
+      function setDefaultText() {
+        $scope.defaultText1 = 'お前が買ってきたアポロチョコ';
+        $scope.defaultText2 = 'いちごの部分だけ全部食った！';
+      }
+
       function setText(t1, t2) {
         $scope.text1 = t1;
         $scope.text2 = t2;
@@ -215,15 +220,18 @@
 
       var search = $location.search();
       if (search['k']) {
+        // Show empty text durling data load, to hide default texts.
         try {
           load(search.k, {
             success: function(key, t1, t2) {
               setText(t1, t2);
+              setDefaultText();
               $scope.$apply();
               _gaq.push(['_trackEvent', 'Load', 'Success', key]);
             },
             failure: function(key, errstr) {
               setEmptyText();
+              setDefaultText();
               $scope.$apply();
               _gaq.push(['_trackEvent', 'Load', 'Failure', key]);
             }
@@ -232,6 +240,8 @@
           // ignore.
           console.log(e);
         }
+      } else {
+        setDefaultText();
       }
     }
   ]);
